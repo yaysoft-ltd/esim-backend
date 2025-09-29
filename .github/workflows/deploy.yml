@@ -1,0 +1,140 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: testing
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, dom, fileinfo, mysql, zip, gd, curl, bcmath, intl
+        coverage: none
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Generate key
+      run: php artisan key:generate
+
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: Create Database
+      run: |
+        mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e 'CREATE DATABASE IF NOT EXISTS testing;'
+
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: testing
+        DB_USERNAME: root
+        DB_PASSWORD: password
+      run: php artisan test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, dom, fileinfo, mysql, zip, gd, curl, bcmath, intl
+
+    - name: Install Dependencies
+      run: composer install --optimize-autoloader --no-dev
+
+    - name: Create deployment artifact
+      env:
+        GITHUB_SHA: ${{ github.sha }}
+      run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+
+    - name: Store artifact for distribution
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-build
+        path: ${{ github.sha }}.tar.gz
+
+    - name: Deploy to DigitalOcean
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.DO_HOST }}
+        username: ${{ secrets.DO_USERNAME }}
+        key: ${{ secrets.DO_SSH_KEY }}
+        port: ${{ secrets.DO_PORT }}
+        script: |
+          cd /var/www/esimtel
+          
+          # Download latest build
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3.raw" \
+               -o ${{ github.sha }}.tar.gz \
+               -L https://api.github.com/repos/yaysoft-ltd/esim-backend/actions/artifacts/latest/zip
+          
+          # Backup current version
+          if [ -d "current" ]; then
+            mv current backup-$(date +%Y%m%d-%H%M%S)
+          fi
+          
+          # Extract new version
+          mkdir -p current
+          tar -xzf ${{ github.sha }}.tar.gz -C current
+          
+          # Set permissions
+          sudo chown -R www-data:www-data current/
+          sudo chmod -R 755 current/
+          sudo chmod -R 775 current/storage current/bootstrap/cache
+          
+          # Copy environment file
+          cp .env current/.env
+          
+          # Install dependencies and optimize
+          cd current
+          composer install --optimize-autoloader --no-dev
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          
+          # Run migrations (if any)
+          php artisan migrate --force
+          
+          # Update symlink for zero-downtime deployment
+          cd ..
+          ln -nfs current public_html
+          
+          # Restart services
+          sudo supervisorctl restart laravel-worker:*
+          sudo service nginx reload
+          
+          # Cleanup old artifacts
+          find . -name "*.tar.gz" -mtime +7 -delete
+          find . -name "backup-*" -mtime +30 -delete
