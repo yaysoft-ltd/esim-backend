@@ -93,24 +93,27 @@ jobs:
         key: ${{ secrets.DO_SSH_KEY }}
         port: ${{ secrets.DO_PORT }}
         script_stop: true
+        envs: GITHUB_SHA
         script: |
           cd /var/www/esimtel
           
           # Create basic structure if first deployment
           mkdir -p releases
           
-          # Download latest build using wget (simpler approach)
-          RELEASE_DIR="releases/${{ github.sha }}"
+          # Create release directory
+          RELEASE_DIR="releases/$GITHUB_SHA"
           mkdir -p "$RELEASE_DIR"
           
-          # Create tar from GitHub
-          cd "$RELEASE_DIR"
-          git clone https://github.com/yaysoft-ltd/esim-backend.git .
-          git checkout ${{ github.sha }}
-          rm -rf .git
+          # Download source code as tar.gz from GitHub
+          curl -L -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/yaysoft-ltd/esim-backend/tarball/$GITHUB_SHA" \
+            -o source.tar.gz
+          
+          # Extract to release directory
+          tar -xzf source.tar.gz -C "$RELEASE_DIR" --strip-components=1
+          rm source.tar.gz
           
           # Copy environment file
-          cd /var/www/esimtel
           cp .env "$RELEASE_DIR/.env"
           
           # Set permissions
