@@ -91,50 +91,53 @@ jobs:
         username: ${{ secrets.DO_USERNAME }}
         key: ${{ secrets.DO_SSH_KEY }}
         port: ${{ secrets.DO_PORT }}
+        script_stop: true
         script: |
           cd /var/www/esimtel
           
-          # Download latest build
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               -H "Accept: application/vnd.github.v3.raw" \
-               -o ${{ github.sha }}.tar.gz \
-               -L https://api.github.com/repos/yaysoft-ltd/esim-backend/actions/artifacts/latest/zip
+          # Create basic structure if first deployment
+          mkdir -p releases
           
-          # Backup current version
-          if [ -d "current" ]; then
-            mv current backup-$(date +%Y%m%d-%H%M%S)
-          fi
+          # Download latest build using wget (simpler approach)
+          RELEASE_DIR="releases/${{ github.sha }}"
+          mkdir -p "$RELEASE_DIR"
           
-          # Extract new version
-          mkdir -p current
-          tar -xzf ${{ github.sha }}.tar.gz -C current
-          
-          # Set permissions
-          sudo chown -R www-data:www-data current/
-          sudo chmod -R 755 current/
-          sudo chmod -R 775 current/storage current/bootstrap/cache
+          # Create tar from GitHub
+          cd "$RELEASE_DIR"
+          git clone https://github.com/yaysoft-ltd/esim-backend.git .
+          git checkout ${{ github.sha }}
+          rm -rf .git
           
           # Copy environment file
-          cp .env current/.env
+          cd /var/www/esimtel
+          cp .env "$RELEASE_DIR/.env"
+          
+          # Set permissions
+          chown -R www-data:www-data "$RELEASE_DIR"
+          chmod -R 755 "$RELEASE_DIR"
+          chmod -R 775 "$RELEASE_DIR/storage" "$RELEASE_DIR/bootstrap/cache"
           
           # Install dependencies and optimize
-          cd current
-          composer install --optimize-autoloader --no-dev
+          cd "$RELEASE_DIR"
+          composer install --optimize-autoloader --no-dev --no-interaction
+          php artisan key:generate --force
           php artisan config:cache
-          php artisan route:cache
+          php artisan route:cache  
           php artisan view:cache
+          php artisan storage:link
           
-          # Run migrations (if any)
+          # Run migrations
           php artisan migrate --force
           
-          # Update symlink for zero-downtime deployment
-          cd ..
+          # Switch to new release (zero-downtime)
+          cd /var/www/esimtel
+          ln -nfs "$RELEASE_DIR" current
           ln -nfs current public_html
           
           # Restart services
-          sudo supervisorctl restart laravel-worker:*
-          sudo service nginx reload
+          supervisorctl restart laravel-worker:* || true
+          systemctl reload nginx
           
-          # Cleanup old artifacts
-          find . -name "*.tar.gz" -mtime +7 -delete
-          find . -name "backup-*" -mtime +30 -delete
+          # Cleanup old releases (keep last 3)
+          cd releases
+          ls -t | tail -n +4 | xargs rm -rf
