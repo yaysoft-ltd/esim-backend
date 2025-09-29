@@ -67,23 +67,38 @@
                           alt="App Icon" class="rounded-3 shadow" width="80">
                   </div>
 
-                  <h3 class="fw-bold mb-2">Get the Esimtel App</h3>
+                  <h3 class="fw-bold mb-2">Get the Esimetry App</h3>
                   <p class="text-muted mb-4">Manage your eSIM plans anytime, anywhere. Stay connected globally with just a tap!</p>
 
                   <!-- Store Buttons -->
                   <div class="d-flex justify-content-center gap-3 flex-wrap">
-                      <a href="https://play.google.com/store/apps/details?id={{systemflag('androidPackageName')}}"
+                      <a href="https://play.google.com/store/apps/details?id=net.yaysoft.esimetry"
                           target="_blank">
                           <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                               alt="Get it on Google Play" height="55">
+                      </a>
+                      <a href="https://apps.apple.com/tr/app/esimetry/id6753170731"
+                          target="_blank">
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                              alt="Download on the App Store" height="55">
                       </a>
                   </div>
 
                   <!-- QR Code Option -->
                   <div class="mt-4">
-                      <p class="small text-muted mb-2">Or scan the QR code:</p>
-                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://play.google.com/store/apps/details?id={{systemflag('androidPackageName')}}"
-                          alt="QR Code" class="img-fluid rounded shadow-sm">
+                      <p class="small text-muted mb-2">Or scan the QR codes:</p>
+                      <div class="d-flex justify-content-center gap-4 flex-wrap">
+                          <div class="text-center">
+                              <img src="{{asset('/assets/esimetry-android.png')}}"
+                                  alt="Android QR Code" class="img-fluid rounded shadow-sm" style="max-width: 120px;">
+                              <p class="small text-muted mt-2">Android</p>
+                          </div>
+                          <div class="text-center">
+                              <img src="{{asset('/assets/esimetry-ios.png')}}"
+                                  alt="iOS QR Code" class="img-fluid rounded shadow-sm" style="max-width: 120px;">
+                              <p class="small text-muted mt-2">iOS</p>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
