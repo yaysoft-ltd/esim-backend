@@ -1,12 +1,13 @@
 <div class="main-header">
     <div class="main-header-logo">
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ url('dashboard') }}" class="logo">
-                <img
-                    src="{{ asset(systemflag('logo')) }}"
-                    alt="Esimtel"
-                    class="navbar-brand"
-                    height="20" />
+            <a href="{{ url('dashboard') }}" class="logo modern-logo-small">
+                <div class="logo-container-small">
+                    <div class="logo-icon-small">
+                        <i class="fas fa-signal"></i>
+                    </div>
+                    <span class="logo-title-small">eSIM Pro</span>
+                </div>
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">

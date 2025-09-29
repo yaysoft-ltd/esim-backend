@@ -1,12 +1,18 @@
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ url('admin/dashboard') }}" class="logo">
-                <img
-                    src="{{ systemflag('logo') ? asset(systemflag('logo')) : asset('assets/adminlogo.png') }}"
-                    alt="EsimTel"
-                    class="navbar-brand"
-                    height="50" />
+            <a href="{{ url('admin/dashboard') }}" class="logo modern-logo">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <div class="logo-gradient">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">eSIM</span>
+                        <span class="logo-subtitle">Pro</span>
+                    </div>
+                </div>
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">

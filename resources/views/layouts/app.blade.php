@@ -16,12 +16,15 @@
     <script>
         WebFont.load({
             google: {
-                families: ["Public Sans:300,400,500,600,700"]
+                families: [
+                    "Inter:300,400,500,600,700,800", 
+                    "JetBrains Mono:400,500,600"
+                ]
             },
             custom: {
                 families: [
                     "Font Awesome 5 Solid",
-                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Regular", 
                     "Font Awesome 5 Brands",
                     "simple-line-icons",
                 ],
