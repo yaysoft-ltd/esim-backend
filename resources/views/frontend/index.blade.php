@@ -15,13 +15,6 @@
                     Smart connectivity for the <span class="highlight">digital nomad</span>
                 </h1>
                 <p class="lead mb-4">Experience seamless internet connectivity worldwide with our premium eSIM solutions for international travelers — instant setup, reliable coverage!</p>
-                <div class="search-wrapper mx-auto mb-5 position-relative">
-                    <input type="text" id="countrySearch" class="form-control" placeholder="Choose your next destination...">
-                    <button class="btn"><i class="bi bi-search"></i></button>
-
-                    <!-- Suggestions dropdown -->
-                    <ul id="searchResults" class="list-group position-absolute w-100 shadow-sm mt-1" style="z-index: 1000; display:none;"></ul>
-                </div>
                 <!-- Plan cards stack -->
                 <div class="plan-stack d-flex justify-content-center position-relative mb-4" data-aos="fade-up"
                     data-aos-delay="100">
@@ -116,8 +109,8 @@
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <div class="badge-pill">Why choose us</div>
-            <h2 class="section-title mt-2">Why choose <span class="highlight">ConnectPro</span>?</h2>
-            <p class="why-text mb-0">We go beyond just providing data. Discover what makes ConnectPro the perfect
+            <h2 class="section-title mt-2">Why choose <span class="highlight">Esimetry</span>?</h2>
+            <p class="why-text mb-0">We go beyond just providing data. Discover what makes Esimetry the perfect
                 travel companion for your next adventure.</p>
         </div>
         <div class="row g-4">
@@ -165,15 +158,15 @@
 <section class="works-section py-5" id="how-it-works">
     <div class="container">
         <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-up">
+            <div class="col-lg-12" data-aos="fade-up">
                 <div class="badge-pill mb-2">We kept it simple for you</div>
-                <h2 class="fw-bold mb-3">How <span class="highlight">ConnectPro</span> eSIM works?</h2>
+                <h2 class="fw-bold mb-3">How <span class="highlight">Esimetry</span> eSIM works?</h2>
                 <p class="mb-4">This is everything you love about your regular mobile network, connecting you
                     when you travel.</p>
                 <div class="step mb-3 d-flex align-items-start">
                     <div class="step-num me-3">1</div>
                     <div>
-                        <h6 class="fw-semibold mb-1">Download and install the ConnectPro app</h6>
+                        <h6 class="fw-semibold mb-1">Download and install the Esimetry app</h6>
                         <p class="small mb-0">Get our app on your device before you leave. It’s available on the
                             App Store and Google Play.</p>
                     </div>
@@ -196,174 +189,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="purchase-card p-4">
-                    <h6 class="fw-semibold mb-2">Thank you for your purchase</h6>
-                    <p class="small mb-3">Scan the QR code to install the eSIM or you can install later via the
-                        app.</p>
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-auto">
-                            <img src="https://www.airalo.com/qr?expires=1842086521&id=54557676&signature=77aa54bdf23e4766e4ae25e6b19cef13f78c471069799e2bebb45da928eafda0" alt="QR code" class="img-fluid" width="80"
-                                height="80">
-                        </div>
-                        <div class="col">
-                            <p class="small mb-1 fw-semibold">7 days data plan</p>
-                            <p class="small mb-1">1 GB - 7 Days</p>
-                            <div class="details small">
-                                <div><span>Price:</span> $2.00</div>
-                                <div><span>Valid:</span> 7 days</div>
-                            </div>
-                        </div>
-                    </div>
-                    <button data-bs-toggle="modal" data-bs-target="#downloadAppModal" class="btn btn-primary w-100">Activate eSIM</button>
-                </div>
-            </div>
         </div>
     </div>
 </section>
 
-<!-- Destinations Section -->
-<section class="destinations-section py-5" id="destinations">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-end flex-wrap mb-4" data-aos="fade-up">
-            <div>
-                <div class="badge-pill mb-2">We’ll see you travel around the world</div>
-                <h2 class="fw-bold">Where are you traveling <span class="highlight">next?</span></h2>
-                <p class="mb-0">Pick your destination then choose a data plan that fits your needs. Esimtel has
-                    regional and global plans for all kinds of travel.</p>
-            </div>
-            <div class="mt-3 mt-md-0">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#downloadAppModal" class="btn btn-dark rounded-pill">View all destinations <i
-                        class="bi bi-arrow-right ms-1"></i></a>
-            </div>
-        </div>
-        <div class="row g-4" data-aos="fade-up" data-aos-delay="100">
-            <!-- Destination card 1 -->
-            @foreach($destinations as $country)
-            <div class="col-md-4">
-                <div data-bs-toggle="modal" data-bs-target="#downloadAppModal" class="dest-card p-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-circle me-3">
-                            <img src="{{ $country->image }}" alt="{{ $country->name }}" width="24" height="24">
-                        </div>
-                        <div>
-                            <h6 class="fw-semibold mb-0">{{ $country->name }}</h6>
-                            <small class="text-muted">Plans available</small>
-                        </div>
-                    </div>
-                    @php
-                    $package = optional($country->operators->first())->esimPackages->first();
-                    @endphp
 
-                    <p class="price mb-0">
-                        @if ($package)
-                        <span class="fw-bold">${{ $package->net_price }}</span> / {{ $package->day }} days
-                        @else
-                        <span class="text-muted">No packages available</span>
-                        @endif
-                    </p>
-                    <div class="arrow-icon">
-                        <i class="bi bi-arrow-right-circle-fill"></i>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section py-5" id="testimonials">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-end flex-wrap mb-4" data-aos="fade-up">
-            <div>
-                <div class="badge-pill mb-2">Happy stories from our customers</div>
-                <h2 class="fw-bold">Loved by thousands of <span class="highlight">travelers</span></h2>
-                <p class="mb-0">Hear the beautiful stories from our worldwide customers who have been travelling
-                    around the world without lost connections.</p>
-            </div>
-            <div class="mt-3 mt-md-0">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#downloadAppModal" class="btn btn-dark rounded-pill">Read more user stories <i
-                        class="bi bi-arrow-right ms-1"></i></a>
-            </div>
-        </div>
-        <!-- Testimonials cards -->
-        <div class="row g-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="col-md-4">
-                <div class="testimonial-card p-4 h-100">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-3"><i class="bi bi-person-circle"></i></div>
-                        <div>
-                            <h6 class="fw-semibold mb-0">Eleanor Jenkins</h6>
-                            <small class="text-muted">From United States</small>
-                        </div>
-                    </div>
-                    <p class="small mb-3">"ConnectPro has revolutionized my travel experience! I can purchase a plan from home and
-                        activate it seamlessly abroad. The data packages are competitively priced and the support is
-                        exceptional. Highly recommend it!"</p>
-                    <div class="stars mb-1">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <small class="text-muted">South Korea<br>24 December 2024</small>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="testimonial-card p-4 h-100">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-3"><i class="bi bi-person-circle"></i></div>
-                        <div>
-                            <h6 class="fw-semibold mb-0">David Lopez</h6>
-                            <small class="text-muted">From Mexico</small>
-                        </div>
-                    </div>
-                    <p class="small mb-3">“I bought an eSIM to travel to Colombia for one week and I had fast
-                        data during my trip. I didn’t have any issue with the activation; it was fast, indeed.”
-                    </p>
-                    <div class="stars mb-1">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <small class="text-muted">Colombia<br>28 August 2024</small>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="testimonial-card p-4 h-100">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-3"><i class="bi bi-person-circle"></i></div>
-                        <div>
-                            <h6 class="fw-semibold mb-0">Abraham Dior</h6>
-                            <small class="text-muted">From Indonesia</small>
-                        </div>
-                    </div>
-                    <p class="small mb-3">“The app was so easy to use; the services are great and the customer
-                        support is top! It’s a great deal for the telephone service.”</p>
-                    <div class="stars mb-1">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <small class="text-muted">United States<br>16 July 2024</small>
-                </div>
-            </div>
-        </div>
-        <!-- Overall rating -->
-        <div class="rating-summary d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
-            <h1 class="mb-0 me-2 fw-bold">4.8</h1>
-            <div class="me-2 fw-semibold">/5</div>
-            <small class="text-muted">62,000+ happy customers based on compliments and customer reviews on
-                Trustpilot</small>
-        </div>
-    </div>
-</section>
 
 <!-- FAQ Section -->
 <section class="faq-section py-5" id="faq">
@@ -371,7 +201,7 @@
         <div class="text-center mb-5" data-aos="fade-up">
             <div class="badge-pill">Have questions?</div>
             <h2 class="section-title mt-2">Frequently Asked <span class="highlight">Questions</span></h2>
-            <p class="why-text mb-0">Here are answers to some common questions about how ConnectPro works. If you
+            <p class="why-text mb-0">Here are answers to some common questions about how Esimetry works. If you
                 need more help, our support team is just a message away.</p>
         </div>
         <div class="accordion" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
@@ -410,62 +240,15 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                             alt="Get it on Google Play" class="store-badge" height="52">
                     </a>
-
+                    <a href="https://apps.apple.com/app/id{{systemflag('iosAppId')}}">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                            alt="Download on the App Store" class="store-badge" height="52">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#countrySearch").on("keyup", function() {
-            let query = $(this).val();
-            if (query.length >= 2) {
-                $.ajax({
-                    url: "{{ route('search.countries') }}",
-                    type: "GET",
-                    data: {
-                        q: query
-                    },
-                    success: function(data) {
-                        let results = $("#searchResults");
-                        results.empty().show();
-                        if (data.length > 0) {
-                            data.forEach(function(item) {
-                                let iconHtml = "";
-                                if (item.image) {
-                                    iconHtml = `<img src="${item.image}" class="me-2 rounded" width="20" height="20" alt="${item.name}">`;
-                                } else {
-                                    iconHtml = `<i class="bi bi-globe me-2"></i>`;
-                                }
-
-                                results.append(
-                                    `<li class="list-group-item list-group-item-action search-item"
-                                    data-id="${item.id}" data-type="${item.type}">
-                                    ${iconHtml} ${item.name}
-                                </li>`
-                                );
-                            });
-                        } else {
-                            results.append(`<li class="list-group-item text-muted">No results found</li>`);
-                        }
-                    }
-                });
-            } else {
-                $("#searchResults").hide();
-            }
-        });
-
-        // On click
-        $(document).on("click", ".search-item", function() {
-            let name = $(this).text().trim();
-            $("#countrySearch").val(name);
-            $("#searchResults").hide();
-            $("#downloadAppModal").modal('show');
-        });
-    });
-</script>
 
 
 

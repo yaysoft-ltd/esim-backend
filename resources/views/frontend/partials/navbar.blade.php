@@ -15,7 +15,12 @@
                 <li class="nav-item"><a class="nav-link" href="#plans">Plans</a></li>
                 <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="btn btn-primary ms-lg-3" data-bs-toggle="modal" data-bs-target="#downloadAppModal" href="#download">Download</a></li>
+                <li class="nav-item me-2">
+                    <button class="btn btn-outline-secondary theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="bi bi-sun-fill" id="theme-icon"></i>
+                    </button>
+                </li>
+                <li class="nav-item"><a class="btn btn-primary ms-lg-1" data-bs-toggle="modal" data-bs-target="#downloadAppModal" href="#download">Download</a></li>
             </ul>
         </div>
     </div>

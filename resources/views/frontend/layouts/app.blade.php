@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{systemflag('appName')}} – Global connection refined for modern travellers</title>
+    <title>{{systemflag('appName')}} – Global eSIM for Travelers</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -40,6 +40,40 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        // Apply saved theme
+        if (savedTheme === 'dark') {
+            body.setAttribute('data-bs-theme', 'dark');
+            themeIcon.className = 'bi bi-moon-fill';
+        } else {
+            body.setAttribute('data-bs-theme', 'light');
+            themeIcon.className = 'bi bi-sun-fill';
+        }
+
+        // Theme toggle event listener
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-bs-theme');
+                
+                if (currentTheme === 'dark') {
+                    body.setAttribute('data-bs-theme', 'light');
+                    themeIcon.className = 'bi bi-sun-fill';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-bs-theme', 'dark');
+                    themeIcon.className = 'bi bi-moon-fill';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
     </script>
 </body>
 
