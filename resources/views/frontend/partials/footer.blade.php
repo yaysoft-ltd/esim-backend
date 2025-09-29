@@ -27,7 +27,6 @@
                           <ul class="list-unstyled">
                               <li><a href="{{url('/')}}">Home</a></li>
                               <li><a href="#plans">Plans</a></li>
-                              <li><a href="#destinations">Destinations</a></li>
                               <li><a href="#about">About us</a></li>
                               <li><a href="#download">Downloads</a></li>
                           </ul>

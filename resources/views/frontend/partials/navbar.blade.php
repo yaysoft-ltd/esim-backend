@@ -13,7 +13,6 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="{{url('/')}}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#plans">Plans</a></li>
-                <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item me-2">
                     <button class="btn btn-outline-secondary theme-toggle" id="theme-toggle" aria-label="Toggle theme">
