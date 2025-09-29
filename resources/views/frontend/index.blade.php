@@ -9,15 +9,14 @@
         <div class="row justify-content-center text-center">
             <div class="col-lg-8" data-aos="fade-up">
                 <div class="badge-pill mb-3">
-                    <i class="bi bi-geo-alt me-1"></i>Always connected wherever you go
+                    <i class="bi bi-wifi me-1"></i>Stay connected across the globe
                 </div>
                 <h1 class="display-5 fw-bold mb-3">
-                    Global connection refined for modern <span class="highlight">traveler</span>
+                    Smart connectivity for the <span class="highlight">digital nomad</span>
                 </h1>
-                <p class="lead mb-4">Get mobile data anywhere with our prepaid and unlimited eSIM plans for
-                    international travel — it’s quick and easy!</p>
+                <p class="lead mb-4">Experience seamless internet connectivity worldwide with our premium eSIM solutions for international travelers — instant setup, reliable coverage!</p>
                 <div class="search-wrapper mx-auto mb-5 position-relative">
-                    <input type="text" id="countrySearch" class="form-control" placeholder="Where do you want to travel?">
+                    <input type="text" id="countrySearch" class="form-control" placeholder="Choose your next destination...">
                     <button class="btn"><i class="bi bi-search"></i></button>
 
                     <!-- Suggestions dropdown -->
@@ -48,8 +47,8 @@
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-half"></i>
                     </div>
-                    <span class="fw-bold">4.8/5</span>
-                    <span class="ms-2 small">(47K+ travelers worldwide)</span>
+                    <span class="fw-bold">4.9/5</span>
+                    <span class="ms-2 small">(62K+ satisfied customers globally)</span>
                 </div>
             </div>
         </div>
@@ -59,10 +58,10 @@
 <!-- Intro / About Section -->
 <section class="intro-section py-5" id="about">
     <div class="container" data-aos="fade-up">
-        <p class="text-center intro-text mx-auto">In an age where staying connected is <span
-                class="highlight">paramount</span> we stand out as a beacon of <span class="highlight">reliable,
-                affordable, and easy</span> connectivity solutions. We ensure that you can travel the world
-            without the usual hassle or worrying about exorbitant roaming charges.</p>
+        <p class="text-center intro-text mx-auto">In today's interconnected world, staying online is <span
+                class="highlight">essential</span>. We deliver <span class="highlight">dependable,
+                cost-effective, and simple</span> connectivity solutions. Travel anywhere without the stress of
+            expensive roaming fees or connection issues.</p>
     </div>
 </section>
 
@@ -70,43 +69,42 @@
 <section class="features-section py-5" id="plans">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <div class="badge-pill">Think the most benefitted way to connect</div>
-            <h2 class="fw-bold mt-2">Enjoy reliable and <span class="highlight">affordable</span> internet in
-                your trips</h2>
-            <p class="mb-0 lead">Esimtel connects to local networks through your phone’s eSIM, so there’s zero
-                hassle with SIM cards or extra phones.</p>
+            <div class="badge-pill">Discover the smartest way to stay online</div>
+            <h2 class="fw-bold mt-2">Experience dependable and <span class="highlight">budget-friendly</span> connectivity on
+                your journeys</h2>
+            <p class="mb-0 lead">Our service leverages your device's eSIM technology to connect with local carriers, eliminating the need for physical SIM cards or additional devices.</p>
         </div>
         <div class="row g-4">
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
                 <div class="feature-box p-4 h-100 bg-feature-1">
                     <div class="feature-icon"><i class="bi bi-infinity"></i></div>
-                    <h5 class="fw-semibold mb-2">Unlimited data</h5>
-                    <p class="small mb-0">Enjoy unlimited data while travelling to numerous destinations
-                        worry‑free.</p>
+                    <h5 class="fw-semibold mb-2">Flexible data plans</h5>
+                    <p class="small mb-0">Access flexible data packages tailored for various destinations with
+                        peace of mind.</p>
                 </div>
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="feature-box p-4 h-100 bg-feature-2">
                     <div class="feature-icon"><i class="bi bi-app"></i></div>
-                    <h5 class="fw-semibold mb-2">Use your favourite apps</h5>
-                    <p class="small mb-0">Get that safe ride home, find that great restaurant and more, all
-                        while staying connected.</p>
+                    <h5 class="fw-semibold mb-2">Access all your apps</h5>
+                    <p class="small mb-0">Navigate safely, discover amazing dining spots, and explore more - all
+                        while maintaining connectivity.</p>
                 </div>
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="feature-box p-4 h-100 bg-feature-3">
                     <div class="feature-icon"><i class="bi bi-headset"></i></div>
-                    <h5 class="fw-semibold mb-2">24/7 Customer support</h5>
-                    <p class="small mb-0">Our customer support is just a message away whenever you need help.
+                    <h5 class="fw-semibold mb-2">Round-the-clock support</h5>
+                    <p class="small mb-0">Our dedicated support team is available around the clock whenever assistance is needed.
                     </p>
                 </div>
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="feature-box p-4 h-100 bg-feature-4">
                     <div class="feature-icon"><i class="bi bi-lightning-charge-fill"></i></div>
-                    <h5 class="fw-semibold mb-2">Fast internet connection</h5>
-                    <p class="small mb-0">Connect instantly at your destination and get back online with fast
-                        mobile data.</p>
+                    <h5 class="fw-semibold mb-2">High-speed connectivity</h5>
+                    <p class="small mb-0">Establish instant connections upon arrival and enjoy rapid mobile data
+                        speeds.</p>
                 </div>
             </div>
         </div>
@@ -118,8 +116,8 @@
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <div class="badge-pill">Why choose us</div>
-            <h2 class="section-title mt-2">Why choose <span class="highlight">Esimtel</span>?</h2>
-            <p class="why-text mb-0">We go beyond just providing data. Discover what makes Esimtel the perfect
+            <h2 class="section-title mt-2">Why choose <span class="highlight">ConnectPro</span>?</h2>
+            <p class="why-text mb-0">We go beyond just providing data. Discover what makes ConnectPro the perfect
                 travel companion for your next adventure.</p>
         </div>
         <div class="row g-4">
@@ -127,9 +125,9 @@
                 <div class="why-card bg-why-1 h-100">
                     <div class="why-icon" style="background: rgba(0,102,255,0.1);"><i class="bi bi-globe2"></i>
                     </div>
-                    <h5 class="fw-semibold mb-2">Global coverage</h5>
-                    <p class="small mb-0">Stay connected in over 200 countries and regions with one simple eSIM.
-                        Wherever you go, Esimtel goes too.</p>
+                    <h5 class="fw-semibold mb-2">Worldwide coverage</h5>
+                    <p class="small mb-0">Stay connected in 200+ countries and regions with one simple eSIM.
+                        Wherever your journey takes you, we're there too.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
@@ -169,13 +167,13 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6" data-aos="fade-up">
                 <div class="badge-pill mb-2">We kept it simple for you</div>
-                <h2 class="fw-bold mb-3">How <span class="highlight">Esimtel</span> eSIM works?</h2>
+                <h2 class="fw-bold mb-3">How <span class="highlight">ConnectPro</span> eSIM works?</h2>
                 <p class="mb-4">This is everything you love about your regular mobile network, connecting you
                     when you travel.</p>
                 <div class="step mb-3 d-flex align-items-start">
                     <div class="step-num me-3">1</div>
                     <div>
-                        <h6 class="fw-semibold mb-1">Download and install the Esimtel app</h6>
+                        <h6 class="fw-semibold mb-1">Download and install the ConnectPro app</h6>
                         <p class="small mb-0">Get our app on your device before you leave. It’s available on the
                             App Store and Google Play.</p>
                     </div>
@@ -300,9 +298,9 @@
                             <small class="text-muted">From United States</small>
                         </div>
                     </div>
-                    <p class="small mb-3">“Esimtel has made my trips much easier! I can buy a plan at home and
-                        activate it abroad without worry. The data packages are affordable and the support is
-                        helpful. Highly recommend it!”</p>
+                    <p class="small mb-3">"ConnectPro has revolutionized my travel experience! I can purchase a plan from home and
+                        activate it seamlessly abroad. The data packages are competitively priced and the support is
+                        exceptional. Highly recommend it!"</p>
                     <div class="stars mb-1">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
@@ -361,7 +359,7 @@
         <div class="rating-summary d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
             <h1 class="mb-0 me-2 fw-bold">4.8</h1>
             <div class="me-2 fw-semibold">/5</div>
-            <small class="text-muted">47,000+ happy customers based on compliments and customer reviews on
+            <small class="text-muted">62,000+ happy customers based on compliments and customer reviews on
                 Trustpilot</small>
         </div>
     </div>
@@ -373,7 +371,7 @@
         <div class="text-center mb-5" data-aos="fade-up">
             <div class="badge-pill">Have questions?</div>
             <h2 class="section-title mt-2">Frequently Asked <span class="highlight">Questions</span></h2>
-            <p class="why-text mb-0">Here are answers to some common questions about how Esimtel works. If you
+            <p class="why-text mb-0">Here are answers to some common questions about how ConnectPro works. If you
                 need more help, our support team is just a message away.</p>
         </div>
         <div class="accordion" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
@@ -402,11 +400,11 @@
     <div class="container">
         <div class="row justify-content-center text-center" data-aos="fade-up">
             <div class="col-lg-9">
-                <div class="badge-pill mb-3">Always connected wherever you go</div>
+                <div class="badge-pill mb-3">Stay connected across the globe</div>
                 <h2 class="fw-bold mb-3">Download the app and manage your plan <span
                         class="highlight">easily</span></h2>
-                <p class="lead mb-4">Get mobile data anywhere with our prepaid and unlimited eSIM plans for
-                    international travel — it’s quick and easy!</p>
+                <p class="lead mb-4">Access mobile connectivity worldwide with our innovative eSIM solutions for
+                    international travel — seamless setup, instant activation!</p>
                 <div class="d-flex justify-content-center gap-3">
                     <a href="https://play.google.com/store/apps/details?id={{systemflag('androidPackageName')}}">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
