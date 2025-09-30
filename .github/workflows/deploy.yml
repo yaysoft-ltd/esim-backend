@@ -1,0 +1,176 @@
+name: Deploy to Digital Ocean
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: esim_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, dom, fileinfo, mysql, zip, bcmath, gd, curl
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install NPM dependencies
+      run: npm ci
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Create Environment file
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Configure Environment for Testing
+      run: |
+        echo "DB_CONNECTION=mysql" >> .env
+        echo "DB_HOST=127.0.0.1" >> .env
+        echo "DB_PORT=3306" >> .env
+        echo "DB_DATABASE=esim_test" >> .env
+        echo "DB_USERNAME=root" >> .env
+        echo "DB_PASSWORD=password" >> .env
+
+    - name: Run Database Migrations
+      run: php artisan migrate --force
+
+    - name: Run Tests
+      run: php artisan test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, dom, fileinfo, mysql, zip, bcmath, gd, curl
+
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install NPM dependencies
+      run: npm ci
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Create deployment artifact
+      env:
+        GITHUB_SHA: ${{ github.sha }}
+      run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules --exclude=.env .
+
+    - name: Store artifact for distribution
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-build
+        path: ${{ github.sha }}.tar.gz
+
+    - name: Deploy to Digital Ocean
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.DO_HOST }}
+        username: ${{ secrets.DO_USERNAME }}
+        key: ${{ secrets.DO_SSH_KEY }}
+        port: ${{ secrets.DO_PORT }}
+        script: |
+          cd /var/www/html
+          
+          # Create backup
+          if [ -d "app" ]; then
+            sudo cp -r app app_backup_$(date +%Y%m%d_%H%M%S)
+          fi
+          
+          # Download and extract new release
+          wget -O app_${{ github.sha }}.tar.gz "${{ secrets.ARTIFACT_DOWNLOAD_URL }}"
+          
+          # Extract to temporary directory
+          mkdir -p app_new
+          tar -xzf app_${{ github.sha }}.tar.gz -C app_new
+          
+          # Copy environment file
+          if [ -f "app/.env" ]; then
+            sudo cp app/.env app_new/.env
+          fi
+          
+          # Set permissions
+          sudo chown -R www-data:www-data app_new
+          sudo chmod -R 755 app_new
+          sudo chmod -R 775 app_new/storage app_new/bootstrap/cache
+          
+          # Replace old app with new
+          if [ -d "app" ]; then
+            sudo mv app app_old
+          fi
+          sudo mv app_new app
+          
+          # Run Laravel commands
+          cd app
+          sudo -u www-data php artisan config:clear
+          sudo -u www-data php artisan cache:clear
+          sudo -u www-data php artisan route:clear
+          sudo -u www-data php artisan view:clear
+          sudo -u www-data php artisan migrate --force
+          sudo -u www-data php artisan queue:restart
+          
+          # Clean up
+          cd ..
+          rm -f app_${{ github.sha }}.tar.gz
+          if [ -d "app_old" ]; then
+            rm -rf app_old
+          fi
+          
+          # Restart services
+          sudo systemctl restart nginx
+          sudo systemctl restart php8.2-fpm
+          
+          echo "Deployment completed successfully!"
