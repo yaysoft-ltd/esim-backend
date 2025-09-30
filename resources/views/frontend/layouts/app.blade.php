@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,7 @@
         AOS.init({
             once: true
         });
+        
         // Change navbar background when scrolling
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('.navbar');
@@ -38,6 +39,38 @@
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
+            }
+        });
+
+        // Dark Mode Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme or default to light
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.setAttribute('data-bs-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = htmlElement.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                htmlElement.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                if (theme === 'dark') {
+                    themeIcon.className = 'bi bi-moon-fill';
+                    themeToggle.title = 'Switch to Light Mode';
+                } else {
+                    themeIcon.className = 'bi bi-sun-fill';
+                    themeToggle.title = 'Switch to Dark Mode';
+                }
             }
         });
     </script>

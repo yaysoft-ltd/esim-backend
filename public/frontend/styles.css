@@ -21,6 +21,26 @@
     --why-4: #fff5ed;
 }
 
+/* Dark Mode Color Palette */
+[data-bs-theme="dark"] {
+  --primary: #3d8bff;          /* lighter blue for dark mode */
+  --primary-dark: #1a73e8;     /* blue for hover states */
+  --secondary: #1a1a1a;        /* dark background */
+  --white: #2d2d2d;            /* dark card background */
+  --dark: #e0e0e0;             /* light text */
+  --light: #b0b0b0;            /* muted light text */
+  /* Feature dark backgrounds */
+  --feature-1: #2a2a3a;
+  --feature-2: #2a2a3a;
+  --feature-3: #2a3a2a;
+  --feature-4: #3a2a2a;
+    /* Why‑choose dark backgrounds */
+    --why-1: #2a2a3a;
+    --why-2: #2a2a3a;
+    --why-3: #2a3a2a;
+    --why-4: #3a2a2a;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--dark);
@@ -49,6 +69,25 @@ a:hover {
 .navbar.scrolled {
   background: var(--white);
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Dark mode navbar styles */
+[data-bs-theme="dark"] .navbar.scrolled {
+  background: var(--white);
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+}
+
+/* Theme toggle button styles */
+#theme-toggle {
+  border: 1px solid var(--light);
+  color: var(--dark);
+  transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
 }
 .navbar .nav-link {
   font-weight: 500;
