@@ -1,12 +1,7 @@
 {
-  "devDependencies": {
-    "laravel-echo": "^2.2.0",
-    "pusher-js": "^8.4.0",
-    "vite": "^5.0.0",
-    "@vitejs/plugin-vue": "^5.0.0"
-  },
+  "private": true,
   "scripts": {
-    "build": "echo 'Build completed successfully'",
-    "dev": "echo 'Dev server ready'"
+    "build": "echo 'No frontend build required for Laravel backend'",
+    "dev": "echo 'Laravel backend - no frontend dev server'"
   }
 }
