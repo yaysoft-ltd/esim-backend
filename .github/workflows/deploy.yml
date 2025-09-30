@@ -138,6 +138,10 @@ jobs:
           ln -nfs "$RELEASE_DIR" current
           ln -nfs current app
           
+          # Also sync to esimtel directory for nginx
+          rsync -av --delete "$RELEASE_DIR"/ /var/www/esimtel/
+          chown -R www-data:www-data /var/www/esimtel
+          
           # Restart services
           supervisorctl restart laravel-worker:* || true
           systemctl reload nginx
