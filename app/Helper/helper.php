@@ -84,14 +84,16 @@ if (!function_exists('updateIfChanged')) {
         return $dirty;
     }
 
-    if (!function_exists('isPermission')) {
-        function isPermission()
-        {
-            $isPermission = false;
-            if (!in_array(Auth::user()->email, config('admin_permissions.restricted_emails'))) {
-                $isPermission = true;
-            }
-            return $isPermission;
-        }
-    }
+      if (!function_exists('isPermission')) {
+      function isPermission()
+      {
+          $isPermission = false;
+          $restrictedEmails = config('admin_permissions.restricted_emails', []);
+
+          if (Auth::check() && !in_array(Auth::user()->email, $restrictedEmails)) {
+              $isPermission = true;
+          }
+          return $isPermission;
+      }
+  }
 }
