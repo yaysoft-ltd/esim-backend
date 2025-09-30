@@ -65,7 +65,7 @@
               </div>
           </div>
           <div class="d-flex justify-content-between align-items-center border-top pt-3 small">
-              <div>© {{date('Y')}} {{systemflag('appName')}}. All rights reserved.</div>
+              <div>© {{date('Y')}} {{systemflag('appName')}}. All rights reserved. YAYSOFT LTD</div>
               <div>
                   <a href="{{route('pages','terms-and-conditions')}}" class="me-3">Terms and conditions</a>
                   <a href="{{route('pages','privacy-policy')}}">Privacy Policy</a>
