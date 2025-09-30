@@ -28,13 +28,13 @@ sudo ./server-setup.sh
 2. Nginx konfigürasyonunu güncelleyin:
 ```bash
 sudo nano /etc/nginx/sites-available/esim-app
-# server_name your_domain.com www.your_domain.com; satırını güncelleyin
+# server_name esimetry.net www.esimetry.net; satırı zaten yapılandırılmış
 ```
 
 ### SSL Sertifikası
 ```bash
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d your_domain.com -d www.your_domain.com
+sudo certbot --nginx -d esimetry.net -d www.esimetry.net
 ```
 
 ## 3. GitHub Secrets Konfigürasyonu
@@ -74,7 +74,7 @@ APP_NAME="eSIM Application"
 APP_ENV=production
 APP_KEY=base64:your_app_key_here
 APP_DEBUG=false
-APP_URL=https://your_domain.com
+APP_URL=https://esimetry.net
 
 # Database
 DB_CONNECTION=mysql
@@ -82,7 +82,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=esim_app
 DB_USERNAME=esim_user
-DB_PASSWORD=your_secure_password
+DB_PASSWORD=yrtemiseten
 
 # Cache & Sessions
 CACHE_DRIVER=redis
@@ -116,7 +116,7 @@ sudo mysql -u root -p
 
 # Database ve user oluşturun
 CREATE DATABASE esim_app;
-CREATE USER 'esim_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+CREATE USER 'esim_user'@'localhost' IDENTIFIED BY 'yrtemiseten';
 GRANT ALL PRIVILEGES ON esim_app.* TO 'esim_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
@@ -255,7 +255,7 @@ sudo systemctl restart nginx
 ```bash
 # Check MySQL status
 sudo systemctl status mysql
-# Check credentials in .env file
+# Check credentials in .env file (DB_PASSWORD=yrtemiseten)
 ```
 
 ### Deployment Failed

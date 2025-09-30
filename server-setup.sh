@@ -31,7 +31,7 @@ sudo mysql_secure_installation
 # Create database and user
 echo "Creating database and user..."
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS esim_app;"
-sudo mysql -e "CREATE USER IF NOT EXISTS 'esim_user'@'localhost' IDENTIFIED BY 'your_secure_password';"
+sudo mysql -e "CREATE USER IF NOT EXISTS 'esim_user'@'localhost' IDENTIFIED BY 'yrtemiseten';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON esim_app.* TO 'esim_user'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
 
@@ -41,7 +41,7 @@ sudo tee /etc/nginx/sites-available/esim-app > /dev/null <<EOL
 server {
     listen 80;
     listen [::]:80;
-    server_name your_domain.com www.your_domain.com;
+    server_name esimetry.net www.esimetry.net;
     root /var/www/html/app/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
@@ -142,7 +142,7 @@ APP_NAME="eSIM Application"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
-APP_URL=https://your_domain.com
+APP_URL=https://esimetry.net
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
@@ -153,7 +153,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=esim_app
 DB_USERNAME=esim_user
-DB_PASSWORD=your_secure_password
+DB_PASSWORD=yrtemiseten
 
 BROADCAST_DRIVER=redis
 CACHE_DRIVER=redis
@@ -191,11 +191,11 @@ EOL
 echo "Server setup completed!"
 echo ""
 echo "Next steps:"
-echo "1. Update domain name in /etc/nginx/sites-available/esim-app"
+echo "1. Domain (esimetry.net) already configured in Nginx"
 echo "2. Copy /var/www/html/.env.template to /var/www/html/app/.env and configure"
 echo "3. Install SSL certificate with Let's Encrypt"
 echo "4. Configure GitHub secrets for deployment"
 echo ""
 echo "To install SSL certificate, run:"
 echo "sudo apt install certbot python3-certbot-nginx"
-echo "sudo certbot --nginx -d your_domain.com -d www.your_domain.com"
+echo "sudo certbot --nginx -d esimetry.net -d www.esimetry.net"
