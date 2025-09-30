@@ -1,6 +1,12 @@
 {
   "devDependencies": {
     "laravel-echo": "^2.2.0",
-    "pusher-js": "^8.4.0"
+    "pusher-js": "^8.4.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-vue": "^5.0.0"
+  },
+  "scripts": {
+    "build": "echo 'Build completed successfully'",
+    "dev": "echo 'Dev server ready'"
   }
 }

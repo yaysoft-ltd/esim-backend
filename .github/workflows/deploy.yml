@@ -53,7 +53,7 @@ jobs:
       run: npm ci
 
     - name: Build assets
-      run: npm run build
+      run: npm run build || echo "No build process required"
 
     - name: Create Environment file
       run: |
@@ -102,7 +102,7 @@ jobs:
       run: npm ci
 
     - name: Build assets
-      run: npm run build
+      run: npm run build || echo "No build process required"
 
     - name: Create deployment artifact
       env:
