@@ -26,7 +26,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
+        php-version: '8.3'
         extensions: mbstring, dom, fileinfo, mysql, zip, gd, curl, bcmath, intl
         coverage: none
 
@@ -68,7 +68,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
+        php-version: '8.3'
         extensions: mbstring, dom, fileinfo, mysql, zip, gd, curl, bcmath, intl
 
     - name: Install Dependencies  
@@ -95,7 +95,7 @@ jobs:
         script_stop: true
         envs: GITHUB_SHA
         script: |
-          cd /var/www/html
+          cd /var/www/esimtel
           
           # Create basic structure if first deployment
           mkdir -p releases
@@ -114,7 +114,7 @@ jobs:
           rm source.tar.gz
           
           # Copy environment file
-          cp app/.env "$RELEASE_DIR/.env" 2>/dev/null || echo "Warning: .env file not found"
+          cp .env "$RELEASE_DIR/.env"
           
           # Set permissions
           chown -R www-data:www-data "$RELEASE_DIR"
@@ -134,13 +134,9 @@ jobs:
           php artisan migrate --force
           
           # Switch to new release (zero-downtime)
-          cd /var/www/html
+          cd /var/www/esimtel
           ln -nfs "$RELEASE_DIR" current
-          ln -nfs current app
-          
-          # Also sync to esimtel directory for nginx
-          rsync -av --delete "$RELEASE_DIR"/ /var/www/esimtel/
-          chown -R www-data:www-data /var/www/esimtel
+          ln -nfs current public_html
           
           # Restart services
           supervisorctl restart laravel-worker:* || true
