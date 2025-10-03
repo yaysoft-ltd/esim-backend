@@ -1,4 +1,4 @@
-INSERT INTO `systemflags` (`id`, `valueType`, `name`, `value`, `isActive`, `isDelete`, `created_at`, `updated_at`, `displayName`, `flagGroupId`, `description`, `parent_id`, `viewenable`) VALUES
+INSERT IGNORE INTO `systemflags` (`id`, `valueType`, `name`, `value`, `isActive`, `isDelete`, `created_at`, `updated_at`, `displayName`, `flagGroupId`, `description`, `parent_id`, `viewenable`) VALUES
   (1, 'File', 'Logo', 'assets/img/uploads/Logo1755588247.jpg', '1', '0', '2023-04-05 10:32:46', '2025-08-19 07:24:07', 'Logo', 12, '', 0, 1),
   (2, 'Text', 'AiraloClientId', '', '1', '0', NULL, '2025-08-28 12:56:42', 'Airalo Client ID', 9, '', 0, 1),
   (3, 'Text', 'AiraloClientSecretKey', '', '1', '0', NULL, '2025-08-28 12:56:42', 'Airalo Client Secret Key', 9, '', 0, 1),

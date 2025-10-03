@@ -1,4 +1,4 @@
-INSERT INTO `flaggroups` (`id`, `flagGroupName`, `parentFlagGroupId`, `displayOrder`, `isActive`, `isDelete`, `created_at`, `updated_at`, `description`, `viewenable`) VALUES
+INSERT IGNORE INTO `flaggroups` (`id`, `flagGroupName`, `parentFlagGroupId`, `displayOrder`, `isActive`, `isDelete`, `created_at`, `updated_at`, `description`, `viewenable`) VALUES
   (1, 'General', NULL, NULL, 1, 0, '2023-03-30 16:30:00', '2023-03-30 16:30:00', '', 1),
   (2, 'Payments', NULL, NULL, 1, 0, '2023-03-30 16:30:00', '2023-03-30 16:30:00', 'Choose Payment Mode Whichever use in app', 1),
   (9, 'Airalo', NULL, NULL, 1, 0, '2023-03-30 16:38:07', '2023-03-30 16:38:07', '', 1),

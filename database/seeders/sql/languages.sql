@@ -1,4 +1,4 @@
-INSERT INTO `languages` (`id`, `languageName`, `created_at`, `updated_at`, `languageCode`, `language_sign`) VALUES
+INSERT IGNORE INTO `languages` (`id`, `languageName`, `created_at`, `updated_at`, `languageCode`, `language_sign`) VALUES
 (1, 'English', '2022-11-07 05:51:25', '2022-11-07 05:51:26', 'en', 'English'),
 (2, 'Gujarati', '2022-11-07 05:51:26', '2022-11-07 05:51:26', 'gu', 'ગુજરાતી'),
 (3, 'Hindi', '2022-11-07 05:52:00', '2022-11-07 05:52:00', 'hi', 'हिन्दी'),
