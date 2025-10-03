@@ -2,9 +2,9 @@ name: Deploy to DigitalOcean
 
 on:
   push:
-    branches: [ main ]
+    branches: [ new ]
   pull_request:
-    branches: [ main ]
+    branches: [ new ]
 
 jobs:
   test:
@@ -60,7 +60,7 @@ jobs:
   deploy:
     # needs: test  # Temporarily disabled
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/new' && github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v4
