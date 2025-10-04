@@ -80,6 +80,11 @@ jobs:
 
           composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist
 
+          # Generate app key if not already set
+          if grep -q "base64:GENERATE_NEW_KEY_ON_SERVER" .env; then
+            php artisan key:generate --force
+          fi
+
           # Clear old caches first
           php artisan config:clear || true
           php artisan route:clear || true
