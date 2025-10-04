@@ -41,6 +41,7 @@ jobs:
         username: ${{ secrets.DO_USERNAME }}
         key: ${{ secrets.DO_SSH_KEY }}
         port: ${{ secrets.DO_PORT }}
+        command_timeout: 10m
         script_stop: true
         envs: GITHUB_SHA
         script: |
@@ -73,14 +74,23 @@ jobs:
           # Install dependencies and optimize
           cd "$RELEASE_DIR"
           composer install --optimize-autoloader --no-dev --no-interaction
-          php artisan key:generate --force
-          php artisan config:cache
-          php artisan route:cache  
-          php artisan view:cache
-          php artisan storage:link
-          
+
+          # Clear old caches first
+          php artisan config:clear || true
+          php artisan route:clear || true
+          php artisan view:clear || true
+          php artisan cache:clear || true
+
+          # Create storage link if not exists
+          php artisan storage:link --force || true
+
           # Run migrations
-          php artisan migrate --force
+          php artisan migrate --force || true
+
+          # Optimize for production
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
           
           # Switch to new release (zero-downtime)
           cd /var/www/esimtel
