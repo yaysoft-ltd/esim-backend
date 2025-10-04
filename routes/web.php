@@ -33,7 +33,7 @@ Route::get('/admin/login', [LoginController::class, 'login'])->name('admin.login
 Route::get('/admin',function () {
 	   return redirect()->route('admin.login');
 });
-Route::middleware(['admincheck', 'admin.permission'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['admincheck'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::match(['GET', 'POST'], '/profile', [DashboardController::class, 'profile'])->name('profile');
 
