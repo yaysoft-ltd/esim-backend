@@ -73,7 +73,12 @@ jobs:
           
           # Install dependencies and optimize
           cd "$RELEASE_DIR"
-          composer install --optimize-autoloader --no-dev --no-interaction
+
+          # Set composer environment variables to avoid timeout and root warnings
+          export COMPOSER_ALLOW_SUPERUSER=1
+          export COMPOSER_PROCESS_TIMEOUT=600
+
+          composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist
 
           # Clear old caches first
           php artisan config:clear || true
