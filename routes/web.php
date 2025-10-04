@@ -115,7 +115,7 @@ Route::middleware(['admincheck'])->prefix('admin')->name('admin.')->group(functi
 });
 
 //Website Routes
-Route::get('/', [HomeController::class, 'login']);
-Route::get('/{slug}', [PageController::class, 'pages'])->name('pages');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/search/countries', [HomeController::class, 'search'])->name('search.countries');
+Route::get('/{slug}', [PageController::class, 'pages'])->name('pages');
 
